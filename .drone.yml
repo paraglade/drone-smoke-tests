@@ -1,15 +1,15 @@
 ---
 kind: pipeline
-name: windows-1903-info
+name: windows-1909-info
 
 platform:
   os: windows
   arch: amd64
-  version: 1903
+  version: 1909
 
 steps:
   - name: info
-    image: mcr.microsoft.com/windows/servercore:1903
+    image: mcr.microsoft.com/windows/servercore:1909
     commands:
       - systeminfo
     volumes:
@@ -23,17 +23,17 @@ steps:
 
 ---
 kind: pipeline
-name: windows-1903
+name: windows-1909
 
 platform:
   os: windows
   arch: amd64
-  version: 1903
+  version: 1909
 
 steps:
   - name: build
     pull: always
-    image: maiwj/dapper:windows-1903
+    image: maiwj/dapper:windows-1909
     commands:
       - dapper.exe -f Dockerfile-windows.dapper -d ci
     volumes:
