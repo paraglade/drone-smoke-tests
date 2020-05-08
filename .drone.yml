@@ -8,7 +8,7 @@ platform:
   version: 1909
 
 steps:
-  - name: info
+  - name: info-pr
     image: mcr.microsoft.com/windows/servercore:1909
     commands:
       - systeminfo
@@ -20,7 +20,22 @@ steps:
         - push
         - pull_request
         - tag
-
+      instance:
+        - drone-pr.rancher.io
+  - name: info-publish
+    image: mcr.microsoft.com/windows/servercore:1909
+    commands:
+      - systeminfo
+    volumes:
+      - name: docker_pipe
+        path: \\\\.\\pipe\\docker_engine
+    when:
+      event:
+        - push
+        - pull_request
+        - tag
+      instance:
+        - drone-publish.rancher.io
 volumes:
   - name: docker_pipe
     host:
