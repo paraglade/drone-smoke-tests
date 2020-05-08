@@ -12,6 +12,7 @@ steps:
     image: mcr.microsoft.com/windows/servercore:1903
     commands:
       - systeminfo
+      - docker.exe info
     volumes:
       - name: docker_pipe
         path: \\\\.\\pipe\\docker_engine
