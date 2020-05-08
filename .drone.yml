@@ -1,7 +1,6 @@
 ---
 kind: pipeline
-type: exec
-name: windows-1903-exec
+name: windows-1903-info
 
 platform:
   os: windows
@@ -10,9 +9,17 @@ platform:
 
 steps:
   - name: info
-    command:
+    image: mcr.microsoft.com/windows/servercore:ltsc2019
+    commands:
       - systeminfo
-      - docker.exe info
+    volumes:
+      - name: docker_pipe
+        path: \\\\.\\pipe\\docker_engine
+    when:
+      event:
+        - push
+        - pull_request
+        - tag
 
 ---
 kind: pipeline
