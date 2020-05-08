@@ -1,16 +1,16 @@
 ---
 kind: pipeline
-name: windows-1909
+name: windows-1903
 
 platform:
   os: windows
   arch: amd64
-  version: 1909
+  version: 1903
 
 steps:
   - name: build
     pull: always
-    image: maiwj/dapper:windows-1909
+    image: maiwj/dapper:windows-1903
     commands:
       - dapper.exe -f Dockerfile-windows.dapper -d ci
     volumes:
