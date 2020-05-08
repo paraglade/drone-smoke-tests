@@ -9,7 +9,7 @@ platform:
 
 steps:
   - name: info
-    image: mcr.microsoft.com/windows/servercore:ltsc2019
+    image: mcr.microsoft.com/windows/servercore:1903
     commands:
       - systeminfo
     volumes:
