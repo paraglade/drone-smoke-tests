@@ -1,5 +1,21 @@
 ---
 kind: pipeline
+type: exec
+name: windows-1903-exec
+
+platform:
+  os: windows
+  arch: amd64
+  version: 1903
+
+steps:
+  - name: info
+    command:
+      - systeminfo
+      - docker.exe info
+
+---
+kind: pipeline
 name: windows-1903
 
 platform:
@@ -8,14 +24,6 @@ platform:
   version: 1903
 
 steps:
-  - name: dind
-    image: docker:dind
-    volumes:
-      - name: docker_pipe
-        path: \\\\.\\pipe\\docker_engine
-    commands:
-      - docker info
-      - docker ps -a
   - name: build
     pull: always
     image: maiwj/dapper:windows-1903
