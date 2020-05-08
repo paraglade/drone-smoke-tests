@@ -1,0 +1,33 @@
+---
+kind: pipeline
+name: windows-1909
+
+platform:
+  os: windows
+  arch: amd64
+  version: 1909
+
+steps:
+  - name: build
+    pull: always
+    image: maiwj/dapper:windows-1909
+    commands:
+      - dapper.exe -f Dockerfile-windows.dapper -d ci
+    volumes:
+      - name: docker_pipe
+        path: \\\\.\\pipe\\docker_engine
+    when:
+      event:
+        - push
+        - pull_request
+        - tag
+
+volumes:
+  - name: docker_pipe
+    host:
+      path: \\\\.\\pipe\\docker_engine
+
+trigger:
+  event:
+    exclude:
+      - promote
