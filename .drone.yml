@@ -45,3 +45,28 @@ trigger:
   event:
     exclude:
       - promote
+
+---
+kind: pipeline
+name: pr-nested-lxc
+
+platform:
+  os: linux
+  arch: amd64
+
+steps:
+- name: build
+  image: rancher/dapper:v0.4.1
+  commands:
+  - dapper ci
+  privileged: true
+  volumes:
+  - name: docker
+    path: /var/run/docker.sock
+  when:
+    event:
+    - push
+    - pull_request
+    - tag
+node:
+  eio: test
