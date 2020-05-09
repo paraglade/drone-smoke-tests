@@ -68,5 +68,8 @@ steps:
     - push
     - pull_request
     - tag
+  instance:
+     - drone-pr.rancher.io
+
 node:
   eio: test
